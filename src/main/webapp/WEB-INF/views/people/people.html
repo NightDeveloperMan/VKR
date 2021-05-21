@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <p th:text="${onePeople.getName()}">VALUE</p>
+    <p th:text="${onePeople.getEmail()}">VALUE</p>
+    <p th:text="${onePeople.getId()}">VALUE</p>
+
+</div>
+
+<form th:method="PATCH"  th:action="@{/people/{id}(id=${onePeople.getId()})}" th:object="${onePeople}" >
+    <label for="name">Edit name: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <div th:if ="${#fields.hasErrors('name')}" th:errors="*{name}" >Error</div>
+    <br>
+    <label for="email">Edit e-mail: </label>
+    <input type="email" th:field="*{email}" id="email"/>
+    <div th:if ="${#fields.hasErrors('email')}" th:errors="*{email}" >Error</div>
+    <input type="submit" value="Edit"/>
+</form>
+
+
+<form th:method="DELETE" th:action="@{/people/{id}(id=${onePeople.getId()})}" th:object="${people}">
+    <input type="submit" value="delete">
+</form>
+
+<a href="/people/">AllList</a>
+</body>
+</html>
